@@ -19,30 +19,38 @@ class MainActivity : AppCompatActivity() {
         cajiga = ActivityMainBinding.inflate(layoutInflater)
         setContentView(cajiga.root)
 
-        cajiga.calculateButton.setOnClickListener{ calculateTip() }
+        cajiga.calculateButton.setOnClickListener { calculateTip() }
+        cajiga.costOfServiceEditText.setOnKeyListener { view, keyCode, _ ->
+            handleKeyEvent(
+                view,
+                keyCode
+            )
+        }
 
     }
 
-    private fun calculateTip(){
+    private fun calculateTip() {
         val tipInString = cajiga.costOfServiceEditText.text.toString()
 
         val cost = tipInString.toDoubleOrNull()
-        if (cost == null || cost == 0.0 ){
+        if (cost == null || cost == 0.0) {
             displayTip(0.0)
             return
         }
 
         val tipPercentage =
-            when(cajiga.tipOptions.checkedRadioButtonId) {
-            R.id.option_twenty_percent -> 0.20
-            R.id.option_eighteen_percent -> 0.18
-            else -> 0.15
+            when (cajiga.tipOptions.checkedRadioButtonId) {
+                R.id.option_twenty_percent -> 0.20
+                R.id.option_eighteen_percent -> 0.18
+                else -> 0.15
             }
 
         var tip = cost * tipPercentage
 
 
-        if (cajiga.roundUpSwitch.isChecked){ tip = kotlin.math.ceil(tip)}
+        if (cajiga.roundUpSwitch.isChecked) {
+            tip = kotlin.math.ceil(tip)
+        }
 
         displayTip(tip)
 
@@ -50,7 +58,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun displayTip(tip: Double) {
         val tipy = NumberFormat.getCurrencyInstance().format(tip)
-        cajiga.tipResult.text = getString(R.string.tip_amount , tipy)
+        cajiga.tipResult.text = getString(R.string.tip_amount, tipy)
 
     }
 
