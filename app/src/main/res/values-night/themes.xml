@@ -12,5 +12,13 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+
+
+
+        <item name="textInputStyle">@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox</item>
+        <item name="radioButtonStyle">@style/Widget.TippyTop.CompoundButton.RadioButton</item>
+        <item name="switchStyle">@style/Widget.TippyTop.CompoundButton.Switch</item>
+
+
     </style>
 </resources>
